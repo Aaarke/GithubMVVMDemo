@@ -10,36 +10,32 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class HomeViewModel : BaseViewModel(){
+class HomeViewModel : BaseViewModel() {
 
     var apiInterface: ApiInterface? = null
         @Inject set
-    private var homeRepository:HomeRepository
+    private var homeRepository: HomeRepository
     private val response: MutableLiveData<Response> = MutableLiveData()
 
     private val disposables = CompositeDisposable()
 
 
     init {
-        homeRepository= HomeRepository.getInstance(apiInterface)
+        homeRepository = HomeRepository.getInstance(apiInterface)
         getPublicRepository()
     }
 
 
-     private fun getPublicRepository(){
-         disposables.add(
-             homeRepository.getPublicRepository()?.
-             subscribeOn(Schedulers.io())?.
-             observeOn(
-                 AndroidSchedulers.mainThread()
-             )?.
-             doOnSubscribe { _ -> response.setValue(Response.loading()) }?.
-             subscribe({
-                 response.setValue(Response.success(it))
-             },{
-                 response.setValue(Response.error(it))
-             })!!
-         )
+    private fun getPublicRepository() {
+        disposables.add(
+            homeRepository.getPublicRepository()?.subscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.doOnSubscribe { _ -> response.setValue(Response.loading()) }?.subscribe({
+                response.setValue(Response.success(it))
+            }, {
+                response.setValue(Response.error(it))
+            })!!
+        )
     }
 
     fun getResponse(): MutableLiveData<Response> {
@@ -47,14 +43,10 @@ class HomeViewModel : BaseViewModel(){
     }
 
 
-
-
     override fun onCleared() {
         super.onCleared()
         disposables.clear()
     }
-
-
 
 
 }

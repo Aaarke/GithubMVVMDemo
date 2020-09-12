@@ -1,194 +1,209 @@
 package com.roshi.ufabertask.model
 
+import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-class GitData {
+data class GitData(
     @SerializedName("id")
     @Expose
-    var id: Long = 0
+    val id: Long = 0,
 
     @SerializedName("node_id")
     @Expose
-    var nodeId: String? = null
+    val nodeId: String? = null,
 
     @SerializedName("name")
     @Expose
-    var name: String? = null
+    val name: String? = null,
 
     @SerializedName("full_name")
     @Expose
-    var fullName: String? = null
+    val fullName: String? = null,
 
     @SerializedName("private")
     @Expose
-    var _private = false
+    val _private: Boolean = false,
 
     @SerializedName("owner")
     @Expose
-    var owner: Owner? = null
+    val owner: Owner? = null,
 
     @SerializedName("html_url")
     @Expose
-    var htmlUrl: String? = null
+    val htmlUrl: String? = null,
 
     @SerializedName("description")
     @Expose
-    var description: String? = null
+    val description: String? = null,
 
     @SerializedName("fork")
     @Expose
-    var fork = false
+    val fork: Boolean = false,
 
     @SerializedName("url")
     @Expose
-    var url: String? = null
+    val url: String? = null,
 
     @SerializedName("forks_url")
     @Expose
-    var forksUrl: String? = null
+    val forksUrl: String? = null,
 
     @SerializedName("keys_url")
     @Expose
-    var keysUrl: String? = null
+    val keysUrl: String? = null,
 
     @SerializedName("collaborators_url")
     @Expose
-    var collaboratorsUrl: String? = null
+    val collaboratorsUrl: String? = null,
 
     @SerializedName("teams_url")
     @Expose
-    var teamsUrl: String? = null
+    val teamsUrl: String? = null,
 
     @SerializedName("hooks_url")
     @Expose
-    var hooksUrl: String? = null
+    val hooksUrl: String? = null,
 
     @SerializedName("issue_events_url")
     @Expose
-    var issueEventsUrl: String? = null
+    val issueEventsUrl: String? = null,
 
     @SerializedName("events_url")
     @Expose
-    var eventsUrl: String? = null
+    val eventsUrl: String? = null,
 
     @SerializedName("assignees_url")
     @Expose
-    var assigneesUrl: String? = null
+    val assigneesUrl: String? = null,
 
     @SerializedName("branches_url")
     @Expose
-    var branchesUrl: String? = null
+    val branchesUrl: String? = null,
 
     @SerializedName("tags_url")
     @Expose
-    var tagsUrl: String? = null
+    val tagsUrl: String? = null,
 
     @SerializedName("blobs_url")
     @Expose
-    var blobsUrl: String? = null
+    val blobsUrl: String? = null,
 
     @SerializedName("git_tags_url")
     @Expose
-    var gitTagsUrl: String? = null
+    val gitTagsUrl: String? = null,
 
     @SerializedName("git_refs_url")
     @Expose
-    var gitRefsUrl: String? = null
+    val gitRefsUrl: String? = null,
 
     @SerializedName("trees_url")
     @Expose
-    var treesUrl: String? = null
+    val treesUrl: String? = null,
 
     @SerializedName("statuses_url")
     @Expose
-    var statusesUrl: String? = null
+    val statusesUrl: String? = null,
 
     @SerializedName("languages_url")
     @Expose
-    var languagesUrl: String? = null
+    val languagesUrl: String? = null,
 
     @SerializedName("stargazers_url")
     @Expose
-    var stargazersUrl: String? = null
+    val stargazersUrl: String? = null,
 
     @SerializedName("contributors_url")
     @Expose
-    var contributorsUrl: String? = null
+    val contributorsUrl: String? = null,
 
     @SerializedName("subscribers_url")
     @Expose
-    var subscribersUrl: String? = null
+    val subscribersUrl: String? = null,
 
     @SerializedName("subscription_url")
     @Expose
-    var subscriptionUrl: String? = null
+    val subscriptionUrl: String? = null,
 
     @SerializedName("commits_url")
     @Expose
-    var commitsUrl: String? = null
+    val commitsUrl: String? = null,
 
     @SerializedName("git_commits_url")
     @Expose
-    var gitCommitsUrl: String? = null
+    val gitCommitsUrl: String? = null,
 
     @SerializedName("comments_url")
     @Expose
-    var commentsUrl: String? = null
+    val commentsUrl: String? = null,
 
     @SerializedName("issue_comment_url")
     @Expose
-    var issueCommentUrl: String? = null
+    val issueCommentUrl: String? = null,
 
     @SerializedName("contents_url")
     @Expose
-    var contentsUrl: String? = null
+    val contentsUrl: String? = null,
 
     @SerializedName("compare_url")
     @Expose
-    var compareUrl: String? = null
+    val compareUrl: String? = null,
 
     @SerializedName("merges_url")
     @Expose
-    var mergesUrl: String? = null
+    val mergesUrl: String? = null,
 
     @SerializedName("archive_url")
     @Expose
-    var archiveUrl: String? = null
+    val archiveUrl: String? = null,
 
     @SerializedName("downloads_url")
     @Expose
-    var downloadsUrl: String? = null
+    val downloadsUrl: String? = null,
 
     @SerializedName("issues_url")
     @Expose
-    var issuesUrl: String? = null
+    val issuesUrl: String? = null,
 
     @SerializedName("pulls_url")
     @Expose
-    var pullsUrl: String? = null
+    val pullsUrl: String? = null,
 
     @SerializedName("milestones_url")
     @Expose
-    var milestonesUrl: String? = null
+    val milestonesUrl: String? = null,
 
     @SerializedName("notifications_url")
     @Expose
-    var notificationsUrl: String? = null
+    val notificationsUrl: String? = null,
 
     @SerializedName("labels_url")
     @Expose
-    var labelsUrl: String? = null
+    val labelsUrl: String? = null,
 
     @SerializedName("releases_url")
     @Expose
-    var releasesUrl: String? = null
+    val releasesUrl: String? = null,
 
     @SerializedName("deployments_url")
     @Expose
-    var deploymentsUrl: String? = null
+    val deploymentsUrl: String? = null
+) : Serializable {
+    companion object {
+        val CALLBACK: DiffUtil.ItemCallback<GitData> = object : DiffUtil.ItemCallback<GitData>() {
+            override fun areItemsTheSame(oldItem: GitData, newItem: GitData): Boolean {
+                return oldItem.id == newItem.id
+
+            }
+
+            override fun areContentsTheSame(oldItem: GitData, newItem: GitData): Boolean {
+                return true
+            }
 
 
+        }
+    }
 }
