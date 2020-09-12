@@ -7,6 +7,7 @@ import com.roshi.ufabertask.di.ApiComponent
 import com.roshi.ufabertask.di.DaggerApiComponent
 import com.roshi.ufabertask.di.NetworkModule
 import com.roshi.ufabertask.home.HomeViewModel
+import com.roshi.ufabertask.repowner.RepoOwnerViewModel
 
 
 abstract class BaseViewModel : ViewModel() {
@@ -31,6 +32,10 @@ abstract class BaseViewModel : ViewModel() {
             }
 
             is ContriButorViewModel->{
+                injector.inject(this )
+            }
+
+            is RepoOwnerViewModel->{
                 injector.inject(this )
             }
 

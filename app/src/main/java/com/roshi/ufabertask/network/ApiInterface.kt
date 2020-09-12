@@ -15,4 +15,7 @@ interface ApiInterface {
     @GET
     fun getContriButers(@Url contriUrl: String): Observable<ArrayList<Item>>
 
+    @GET
+    fun getAllRepoOfUser(@Url reposUrl: String): Observable<ArrayList<Item>>
+
 }

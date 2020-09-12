@@ -2,6 +2,7 @@ package com.roshi.ufabertask.di
 
 import com.roshi.ufabertask.contributor.ContriButorViewModel
 import com.roshi.ufabertask.home.HomeViewModel
+import com.roshi.ufabertask.repowner.RepoOwnerViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -18,6 +19,8 @@ interface ApiComponent {
 
     fun inject(homeViewModel: HomeViewModel)
     fun inject(contriButorViewModel: ContriButorViewModel)
+    fun inject(repoOwnerViewModel: RepoOwnerViewModel)
+
 
 
 

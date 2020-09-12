@@ -20,6 +20,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.roshi.ufabertask.R
 import com.roshi.ufabertask.model.GitData
 import com.roshi.ufabertask.model.Item
+import com.roshi.ufabertask.repowner.AllRepoAdapter
+import com.roshi.ufabertask.repowner.RepoOwnerActivity
 import com.roshi.ufabertask.utility.Keys
 import kotlinx.android.synthetic.main.activity_contri_butor.*
 import kotlinx.android.synthetic.main.content_repo_contri.*
@@ -62,17 +64,17 @@ class ContriButorActivity : AppCompatActivity() {
     }
 
     private fun setAdapter(items: ArrayList<Item>?) {
-        val mContributorAdapter = ContributorAdapter(this, items,object:
+        val mContributorAdapter = ContributorAdapter(this, items, object :
             OnRepoItemClickedListener {
-            override fun onItemClicked(pos:Int,item: Item,imageView: ImageView) {
+            override fun onItemClicked(pos: Int, item: Item, imageView: ImageView) {
                 val bundle = Bundle()
-                val i = Intent(this@ContriButorActivity, ContriButorActivity::class.java)
+                val i = Intent(this@ContriButorActivity, RepoOwnerActivity::class.java)
                 bundle.putSerializable(Keys.EXTRAS.REPO_ITEM, item)
                 i.putExtras(bundle)
                 startActivity(i)
             }
         })
-        val mGridLayoutManager = GridLayoutManager(this,4)
+        val mGridLayoutManager = GridLayoutManager(this, 4)
         mGridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 mGridLayoutManager.spanCount
