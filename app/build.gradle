@@ -7,9 +7,14 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.roshi.ufabertask"
+        multiDexEnabled true
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -19,6 +24,7 @@ android {
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -33,10 +39,10 @@ def glideVersion = '4.11.0'
 
 def rxJavaVersion = '2.1.1'
 
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation "com.github.bumptech.glide:glide:$glideVersion"
@@ -45,7 +51,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitversion"
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation 'io.paperdb:paperdb:2.6'
-
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"

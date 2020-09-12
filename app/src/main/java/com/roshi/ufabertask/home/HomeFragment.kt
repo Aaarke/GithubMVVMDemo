@@ -1,12 +1,15 @@
 package com.roshi.ufabertask.home
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.roshi.ufabertask.R
+import com.roshi.ufabertask.model.GitData
 
 class HomeFragment : Fragment() {
 
@@ -16,14 +19,29 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        setAllObserver()
+
+    }
+
+    private fun setAllObserver() {
+        viewModel.getResponse().observe(viewLifecycleOwner, Observer {
+            setValue(it.data)
+        })
+    }
+
+    private fun setValue(listRepo: List<GitData>?) {
+        Log.d("List of values",listRepo.toString())
     }
 
 }

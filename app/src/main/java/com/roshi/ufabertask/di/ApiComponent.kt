@@ -16,8 +16,7 @@ interface ApiComponent {
     }
 
     fun inject(homeViewModel: HomeViewModel)
-//    fun inject(repoDetailViewModel: RepoDetailViewModel)
-//    fun inject(contriButorViewModel: ContriButorViewModel)
+
 
 
 

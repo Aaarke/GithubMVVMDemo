@@ -3,7 +3,6 @@ package com.roshi.ufabertask.network
 import com.roshi.ufabertask.model.GitData
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.QueryMap
 
 interface ApiInterface {
     /**

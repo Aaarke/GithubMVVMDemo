@@ -14,7 +14,7 @@ class HomeViewModel : BaseViewModel(){
 
     var apiInterface: ApiInterface? = null
         @Inject set
-    private lateinit var homeRepository:HomeRepository
+    private var homeRepository:HomeRepository
     private val response: MutableLiveData<Response> = MutableLiveData()
 
     private val disposables = CompositeDisposable()
@@ -22,10 +22,11 @@ class HomeViewModel : BaseViewModel(){
 
     init {
         homeRepository= HomeRepository.getInstance(apiInterface)
+        getPublicRepository()
     }
 
 
-     fun getPublicRepository(){
+     private fun getPublicRepository(){
          disposables.add(
              homeRepository.getPublicRepository()?.
              subscribeOn(Schedulers.io())?.
@@ -39,8 +40,13 @@ class HomeViewModel : BaseViewModel(){
                  response.setValue(Response.error(it))
              })!!
          )
-
     }
+
+    fun getResponse(): MutableLiveData<Response> {
+        return response
+    }
+
+
 
 
     override fun onCleared() {
