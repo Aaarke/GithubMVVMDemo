@@ -1,12 +1,12 @@
 package com.roshi.ufabertask.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
 import com.roshi.ufabertask.base.BaseViewModel
-import com.roshi.ufabertask.model.GitData
 import com.roshi.ufabertask.network.ApiInterface
-import java.util.concurrent.Executor
+import com.roshi.ufabertask.network.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
@@ -14,13 +14,38 @@ class HomeViewModel : BaseViewModel(){
 
     var apiInterface: ApiInterface? = null
         @Inject set
-    var errorMessage: MutableLiveData<String>? = MutableLiveData()
-    var executor: Executor? = null
-    var pagedListLiveData: LiveData<PagedList<GitData>>? = null
-    var filterTextAll = MutableLiveData<String>()
     private lateinit var homeRepository:HomeRepository
+    private val response: MutableLiveData<Response> = MutableLiveData()
+
+    private val disposables = CompositeDisposable()
+
 
     init {
+        homeRepository= HomeRepository.getInstance(apiInterface)
+    }
+
+
+     fun getPublicRepository(){
+         disposables.add(
+             homeRepository.getPublicRepository()?.
+             subscribeOn(Schedulers.io())?.
+             observeOn(
+                 AndroidSchedulers.mainThread()
+             )?.
+             doOnSubscribe { _ -> response.setValue(Response.loading()) }?.
+             subscribe({
+                 response.setValue(Response.success(it))
+             },{
+                 response.setValue(Response.error(it))
+             })!!
+         )
+
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
     }
 
 
