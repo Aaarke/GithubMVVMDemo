@@ -1,8 +1,10 @@
 package com.roshi.ufabertask.network
 
 import com.roshi.ufabertask.model.GitData
+import com.roshi.ufabertask.model.Item
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Url
 
 interface ApiInterface {
     /**
@@ -10,5 +12,7 @@ interface ApiInterface {
      */
     @GET("repositories")
     fun getRepo(): Observable<List<GitData>>
+    @GET
+    fun getContriButers(@Url contriUrl: String): Observable<ArrayList<Item>>
 
 }

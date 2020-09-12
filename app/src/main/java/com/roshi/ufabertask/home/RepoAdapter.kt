@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -32,6 +33,8 @@ class RepoAdapter(var inflater: LayoutInflater, var onItemClickedListeners: OnIt
         holder.itemView.setOnClickListener {
             onItemClickedListeners.onItemClicked(getItem(position),position,holder.itemView.ivAvtar)
         }
+        ViewCompat.setTransitionName(holder.itemView.ivAvtar,getItem(position)?.htmlUrl)
+
 
     }
 

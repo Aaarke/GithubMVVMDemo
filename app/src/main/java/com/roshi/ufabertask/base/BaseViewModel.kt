@@ -1,6 +1,7 @@
 package com.roshi.ufabertask.base
 
 import androidx.lifecycle.ViewModel
+import com.roshi.ufabertask.contributor.ContriButorViewModel
 
 import com.roshi.ufabertask.di.ApiComponent
 import com.roshi.ufabertask.di.DaggerApiComponent
@@ -27,6 +28,10 @@ abstract class BaseViewModel : ViewModel() {
         when (this) {
             is HomeViewModel -> {
                 injector.inject(this)
+            }
+
+            is ContriButorViewModel->{
+                injector.inject(this )
             }
 
         }

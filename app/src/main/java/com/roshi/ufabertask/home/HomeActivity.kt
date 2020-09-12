@@ -36,11 +36,11 @@ class HomeActivity : BaseActivity() ,HomeFragment.OnHomeFragmentInteractionListe
         bundle.putSerializable(Keys.EXTRAS.REPO_ITEM, item)
         i.putExtras(bundle)
         i.putExtra(EXTRA_AVTAR_IMAGE_TRANSITION_NAME, ViewCompat.getTransitionName(sharedImageView))
-//        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-//            this,
-//            sharedImageView,
-//            ViewCompat.getTransitionName(sharedImageView)!!
-//        )
-        startActivity(i)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            sharedImageView,
+            ViewCompat.getTransitionName(sharedImageView)!!
+        )
+        startActivity(i, options.toBundle())
     }
 }
