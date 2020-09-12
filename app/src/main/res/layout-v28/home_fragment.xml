@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
-
+<layout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,8 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:outlineAmbientShadowColor="@color/material_redA700"
-                android:outlineSpotShadowColor="@color/material_red100"
-                tools:targetApi="p" />
+                android:outlineSpotShadowColor="@color/material_red100" />
 
             <TextView
                 android:id="@+id/tvError"

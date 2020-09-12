@@ -42,4 +42,10 @@
     <color name="text_color">#52575C</color>
     <color name="background">#dddddd</color>
     <color name="green">#31B057</color>
+    <color name="colorConnected">#4CAF50</color>
+    <color name="colorDisconnected">#FF5252</color>
+    <color name="colorDisconnecting">#FF9800</color>
+    <color name="snackbar_bg_color_error">#e6e2574c</color>
+
+
 </resources>

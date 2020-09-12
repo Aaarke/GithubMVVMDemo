@@ -97,5 +97,10 @@
     <string name="contributors">Contributors</string>
     <string name="post_error">An error occurred while loading the posts</string>
     <string name="repo_list">Repo List</string>
+    <string name="messageConnected">Connected</string>
+    <string name="messageDisconnected">Disconnected</string>
+    <string name="messageDisconnecting">Losing connection</string>
+    <string name="no_result">No result found</string>
+
 
 </resources>

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roshi.ufabertask.databinding.HomeFragmentBinding
 import com.roshi.ufabertask.model.GitData
+import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
 
@@ -45,13 +46,18 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding.main.setOnRefreshListener {
+            main.isRefreshing = false
+        }
         setSmsAdapter()
         setAllObserver()
 
     }
 
     private fun setAllObserver() {
+        pbHomeLoader.visibility=View.VISIBLE
         viewModel.getResponse().observe(viewLifecycleOwner, {
+            pbHomeLoader.visibility=View.GONE
             setValue(it.data)
         })
     }

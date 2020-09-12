@@ -27,10 +27,10 @@ class HomeActivity : BaseActivity() ,HomeFragment.OnHomeFragmentInteractionListe
 
 
     override fun onFragmentInteraction(position: Int, item: GitData, imageView: ImageView) {
-       openContriButerActivity(position,item,imageView)
+       openContriButerActivity(item, imageView)
     }
 
-    private fun openContriButerActivity(position: Int, item: GitData, sharedImageView: ImageView) {
+    private fun openContriButerActivity(item: GitData, sharedImageView: ImageView) {
         val bundle = Bundle()
         val i = Intent(this, ContriButorActivity::class.java)
         bundle.putSerializable(Keys.EXTRAS.REPO_ITEM, item)

@@ -2,7 +2,6 @@ package com.roshi.ufabertask.home
 
 import android.graphics.Bitmap
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
@@ -18,7 +17,7 @@ import com.roshi.ufabertask.databinding.ItemRepoBinding
 import com.roshi.ufabertask.model.GitData
 import kotlinx.android.synthetic.main.item_repo.view.*
 
-class RepoAdapter(var inflater: LayoutInflater, var onItemClickedListeners: OnItemClickedListeners) :
+class RepoAdapter(private var inflater: LayoutInflater, private var onItemClickedListeners: OnItemClickedListeners) :
     ListAdapter<GitData, RepoAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
@@ -29,7 +28,7 @@ class RepoAdapter(var inflater: LayoutInflater, var onItemClickedListeners: OnIt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setData(getItem(position),position)
+        holder.setData(position)
         holder.itemView.setOnClickListener {
             onItemClickedListeners.onItemClicked(getItem(position),position,holder.itemView.ivAvtar)
         }
@@ -39,7 +38,7 @@ class RepoAdapter(var inflater: LayoutInflater, var onItemClickedListeners: OnIt
     }
 
    inner class ViewHolder(private val binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(item: GitData?, position: Int) {
+        fun setData(position: Int) {
             try {
                 Glide.with(binding.root.context)
                     .asBitmap()
