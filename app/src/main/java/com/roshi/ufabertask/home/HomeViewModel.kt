@@ -35,10 +35,10 @@ class HomeViewModel : BaseViewModel() {
             homeRepository.getPublicRepository()?.subscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.doOnSubscribe { _ -> response.setValue(Response.loading()) }?.subscribe({
-                response.setValue(Response.success(it))
+                response.value = Response.success(it)
                 networkStatus.value=Status.SUCCESS
             }, {
-                response.setValue(Response.error(it))
+                response.value = Response.error(it)
                 networkStatus.value=Status.ERROR
             })!!
         )
