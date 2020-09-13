@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roshi.ufabertask.databinding.HomeFragmentBinding
 import com.roshi.ufabertask.model.GitData
+import com.roshi.ufabertask.network.Status
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
@@ -45,32 +46,48 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Inflate the layout for this fragment
+        pbHomeLoader.visibility=View.VISIBLE
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.main.setOnRefreshListener {
             main.isRefreshing = false
         }
-        setSmsAdapter()
+        setRepoAdapter()
         setAllObserver()
 
     }
 
     private fun setAllObserver() {
-        pbHomeLoader.visibility=View.VISIBLE
         viewModel.getResponse().observe(viewLifecycleOwner, {
             pbHomeLoader.visibility=View.GONE
             setValue(it.data)
         })
+        viewModel.getNetworkStatus().observe(viewLifecycleOwner,{
+            when(it){
+                Status.SUCCESS->{
+                    pbHomeLoader.visibility=View.GONE
+                }
+                Status.LOADING->{
+                    pbHomeLoader.visibility=View.VISIBLE
+                }
+                Status.ERROR->{
+                    pbHomeLoader.visibility=View.GONE
+                }else->{
+                pbHomeLoader.visibility=View.GONE
+
+            }
+            }
+        })
     }
 
     private fun setValue(listRepo: List<GitData>?) {
-        repoAdapter.submitList(listRepo)
+        repoAdapter.submitList( listRepo?.subList(0,20))
     }
 
 
     /**
      * ******************************** Function used to set repo adapter ***********************
      */
-    private fun setSmsAdapter() {
+    private fun setRepoAdapter() {
         repoAdapter = RepoAdapter(layoutInflater,object :OnItemClickedListeners{
 
 
