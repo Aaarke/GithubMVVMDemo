@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var repoAdapter: RepoAdapter
-    private lateinit var binding:HomeFragmentBinding
+    private lateinit var binding: HomeFragmentBinding
     private var listener: OnHomeFragmentInteractionListener? = null
 
     override fun onAttach(context: Context) {
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Inflate the layout for this fragment
-        pbHomeLoader.visibility=View.VISIBLE
+        pbHomeLoader.visibility = View.VISIBLE
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         binding.main.setOnRefreshListener {
             main.isRefreshing = false
@@ -58,41 +58,42 @@ class HomeFragment : Fragment() {
 
     private fun setAllObserver() {
         viewModel.getResponse().observe(viewLifecycleOwner, {
-            pbHomeLoader.visibility=View.GONE
+            pbHomeLoader.visibility = View.GONE
             setValue(it.data)
         })
-        viewModel.getNetworkStatus().observe(viewLifecycleOwner,{
-            when(it){
-                Status.SUCCESS->{
-                    pbHomeLoader.visibility=View.GONE
+        viewModel.getNetworkStatus().observe(viewLifecycleOwner, {
+            when (it) {
+                Status.SUCCESS -> {
+                    pbHomeLoader.visibility = View.GONE
                 }
-                Status.LOADING->{
-                    pbHomeLoader.visibility=View.VISIBLE
+                Status.LOADING -> {
+                    pbHomeLoader.visibility = View.VISIBLE
                 }
-                Status.ERROR->{
-                    pbHomeLoader.visibility=View.GONE
-                }else->{
-                pbHomeLoader.visibility=View.GONE
+                Status.ERROR -> {
+                    pbHomeLoader.visibility = View.GONE
+                }
+                else -> {
+                    pbHomeLoader.visibility = View.GONE
 
-            }
+                }
             }
         })
     }
 
     private fun setValue(listRepo: List<GitData>?) {
-        repoAdapter.submitList( listRepo?.subList(0,20))
+        repoAdapter.submitList(listRepo?.subList(0, 20))
     }
 
 
     /**
-     * ******************************** Function used to set repo adapter ***********************
+     * ******************************** Function used to set repo adapter **************************
      */
     private fun setRepoAdapter() {
-        repoAdapter = RepoAdapter(layoutInflater,object :OnItemClickedListeners{
+        repoAdapter = RepoAdapter(layoutInflater, object : OnItemClickedListeners {
 
 
             override fun onItemClicked(gitData: GitData, position: Int, imageView: ImageView) {
-                navigateToRepoDetail(gitData,position,imageView)
+                navigateToRepoDetail(gitData, position, imageView)
 
             }
         })
@@ -101,7 +102,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToRepoDetail(gitData: GitData, position: Int, imageView: ImageView) {
-        listener?.onFragmentInteraction(position,gitData,imageView)
+        listener?.onFragmentInteraction(position, gitData, imageView)
     }
 
 
